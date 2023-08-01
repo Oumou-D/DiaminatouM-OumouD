@@ -1,1 +1,104 @@
-hh
+<!doctype html>
+<html>
+    <head>
+        <title>Prediction des charges d'assurances maladies</title>
+        <style>
+            /* Style de la page */
+            body {
+                font-family: Arial, sans-serif;
+                font-size: 16px;
+                background-color: #e7f2ef;
+            }
+
+            h1, h2 {
+                color: #333;
+            }
+
+            /* Style du formulaire */
+            form {
+                background-color: #bcd7c4;
+                border: 1px solid #DDD;
+                border-radius: 5px;
+                box-shadow: 0 0 10px #c6c6c6;
+                padding: 20px;
+                margin: 20px auto;
+                max-width: 500px;
+            }
+
+            label {
+                display: block;
+                margin-bottom: 10px;
+            }
+
+            input[type="number"], select {
+                padding: 5px;
+                border-radius: 5px;
+                border: 1px solid #CCC;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            select {
+                height: 35px;
+            }
+
+            input[type="submit"] {
+                background-color: #333;
+                color: #FFF;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            /* Style du résultat de la prédiction */
+            h2 {
+                margin-top: 20px;
+                color: #333;
+                font-size: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Prediction des charges d'assurances maladies</h1>
+        <form action="{{ url_for('predict') }}" method="post">
+            <label>Age</label>
+            <input type="number" name="age" step="1" required><br><br>
+            <label>Sexe</label>
+            <select name="sexe">
+                <option value="0">Femme</option>
+                <option value="1">Homme</option>
+            </select><br><br>
+            <label>BMI</label>
+            <input type="number" name="bmi" step="0.01" required><br><br>
+            <label>Childrens</label>
+            <input type="number" name="enfants" step="1" required><br><br>
+            <label>Smoker</label>
+            <select name="fumeur">
+                <option value="0">Non</option>
+                <option value="1">Oui</option>
+            </select><br><br>
+            <label>region_northwest</label>
+            <select name="region_northwest">
+                <option value="0">Non</option>
+                <option value="1">Oui</option>
+            </select><br><br>
+            <label>region_southeast</label>
+            <select name="region_southeast">
+                <option value="0">Non</option>
+                <option value="1">Oui</option>
+            </select><br><br>
+            <label>region_southwest</label>
+            <select name="region_southwest">
+                <option value="0">Non</option>
+                <option value="1">Oui</option>
+            </select><br><br>
+            <input type="submit" value="Predict">
+        </form>
+        <form>
+            {% if prediction_text %}
+                <h2>{{ prediction_text }}</h2>
+            {% endif %}
+        </form>
+    </body>
+</html>
